@@ -1,0 +1,25 @@
+import requests 
+
+pokemon = input("qual pokémon deseja pesquisar? ").lstrip().lower() 
+
+url = "https://pokeapi.co/api/v2/pokemon/" + pokemon 
+
+resposta = requests.get(url)
+
+print ("status:", resposta.status_code)
+
+dados = resposta.json()
+
+print ("--- INFORMAÇÕES GERAIS ---")
+print ("nome:", dados ['name'])
+print ("número:", dados ['id'])
+print ("altura:", dados ['height'])
+print ("peso:", dados ['weight'])
+
+print ("--- TIPO ---")
+for item in dados ["types"]:
+    print ("-", item["type"]["name"])
+
+print ("--- STATS ---")
+for stats in dados ["stats"]:
+    print ("-",  stats["stat"]["name"], ":", stats["base_stat"])
